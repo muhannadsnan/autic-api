@@ -10,7 +10,7 @@ var routing = require('./routes');
 app.use(routing.cats);
 app.get('/autic', catsController.index);
 app.get('/', (req, resp)=>{
-    resp.send("<h1>Hallooooooo !</h1>");
+    resp.send(`<h1>${envDB.messageConnected} on port ${envDB.port}</h1>`);
 });
 
 // LISTEN

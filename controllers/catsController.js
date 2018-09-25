@@ -8,7 +8,7 @@ exports.index = function (req, resp) {
 }
 
 exports.create = function (req, resp) {
-    var newCat = req.body;
+    var newCat = req.body; // resp.json(newCat);
     Category.createCategory(newCat, function(err, result){
         if (err) throw err;
         resp.json(newCat);

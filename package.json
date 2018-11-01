@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/muhannadsnan/autic-api#readme",
   "dependencies": {
+    "azure-iothub": "^1.8.1",
     "body-parser": "*",
     "express": "*",
     "mongodb": "*"

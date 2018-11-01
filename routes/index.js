@@ -1,5 +1,5 @@
  var routing = { 
-    cats: require('./catsRoutes'), 
+    devs: require('./devsRoutes'), 
     // products: require('./productsRoutes')
 };
 

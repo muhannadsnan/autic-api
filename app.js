@@ -6,11 +6,11 @@ app.use(bodyParser.json()); // configure the app to use bodyParser()
 var environment = require('./environment/environment')
 global.ENV = environment.env1;
 //CONTROLLERS
-var catsController = require("./controllers/catsController");
+var devsController = require("./controllers/devsController");
 // ROUTES
 var routing = require('./routes');
-app.use(routing.cats);
-app.get('/autic', catsController.index);
+app.use(routing.devs);
+app.get('/devices', devsController.index);
 app.get('/', (req, resp)=>{
     resp.send(`<h1>${ENV.db.messageConnected} on port:<br> ${ENV.port}</h1>`);
 });

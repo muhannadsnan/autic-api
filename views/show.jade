@@ -1,2 +1,13 @@
-h1= JSON.stringify(muhannad)
-#JSON.stringify
+extends ./layout.jade
+
+block title
+  title Article Title
+
+block content
+  pre= JSON.stringify(result)
+  <div class="ct-chart ct-perfect-fourth"></div>
+
+  script.
+    var result = JSON.stringify(result)
+    console.log('s', result)
+    new Chartist.Line('.ct-chart', result);

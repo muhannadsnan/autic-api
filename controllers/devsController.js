@@ -5,8 +5,10 @@ var IoT = iothub.Registry.fromConnectionString('HostName=IoT-Hub-Autic.azure-dev
 exports.index = function (req, resp) {
     Device.readDevices((err, result) => {
         if (err) throw err;
-        resp.json(result);
+        // resp.json(result);
+        resp.render("show.jade", {muhannad: result});
     });
+    //<div class="ct-chart ct-perfect-fourth"></div>
 }
 
 exports.insertDataFromDevice = function (req, resp) {

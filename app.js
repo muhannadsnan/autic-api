@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // configure the app to use bodyParser()
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 //ENV
 var environment = require('./environment/environment')
 global.ENV = environment.env1;

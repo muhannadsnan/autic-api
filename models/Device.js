@@ -8,8 +8,8 @@ var mongoClient = require("mongodb").MongoClient.connect(ENV.db.uri, { useNewUrl
 });
 
 // FUNCTIONS
-module.exports.createDataForDevice = function(query, newData, callback){
-    collection.updateOne(query, {$set: newData}, {upsert: true}, callback); // update or insert if not exist
+module.exports.createDataForDevice = function(newData, callback){
+    collection.insertOne({newData}, {upsert: true}, callback); // update or insert if not exist
 };
 
 module.exports.createDevice = function(newDev, callback){

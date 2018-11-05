@@ -17,7 +17,7 @@ exports.insertDataFromDevice = function (req, resp) {
                         "lastUpdated": twin.properties.desired.$metadata.$lastUpdated,
                         "version": twin.properties.desired.$metadata.$lastUpdatedVersion,
                         ...twin.properties.reported.tags};
-        Device.createDataForDevice(query, newData, function(err, result){
+        Device.createDataForDevice(newData, function(err, result){
             if(err) throw err;
             resp.json(newData);
         });

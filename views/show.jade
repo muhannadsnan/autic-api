@@ -4,84 +4,33 @@ block title
     title= ttl
 
 block content
-    h1 HI
+    h1 Autic device:  #{device}
     pre= JSON.stringify(result)
     <div class="ct-chart ct-perfect-fourth"></div>
+    //- each val, index in arr
+        //- <div class="ct-chart#{index} ct-perfect-fourth"></div>
+
 
     script.
-        //- var x = !{JSON.stringify(x)}
-        //- console.log('s', x)
-
-        //- var x = {
-        //-             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-        //-             series: [
-        //-                 [5, 2, 4, 2, 0]
-        //-             ]
-        //-         }
-        function _date(d){
-            return new Date(d).getDate()
-        }
         var chartData = !{JSON.stringify(chartData)}
         console.log('chartData', chartData)
-        
-        var res = [
-            //- {name: 'tag1', series: [VALUES...], labels: [DATES...]},
-        ];
-
-        function fillTags() {
-            var tags = getUniqTags();
-            tags.forEach( tag => {
-                chartData.forEach(row => {
-                    Object.keys(row).forEach(att => { 
-                        if(att == tag){
-                            if(!resIncludesTagBefore(tag)){
-                                var n = {name: tag, series: [[]], labels: []}
-                                n.series[0].push(row[att])
-                                n.labels.push(_date(row['lastUpdated']))
-                                res.push(n);
-
-
-                            }else{
-                                res.forEach(y => {
-                                    if(y.name == tag){
-                                        y.series[0].push(row[att]); 
-                                        y.labels.push(_date(row['lastUpdated']));
-                                    }
-                                });
-                            }
-                        }
-                    });
-                });
-            });
-
-            return res;
-        }
-
-        function resIncludesTagBefore(tag){
-            var x = false;
-            res.forEach( el => {
-                if(el.name == tag)
-                    x = true;
-            });
-            return x;
-        }
-
-        function getUniqTags(){
-            var tags = [];
-            chartData.forEach((obj)=>{ 
-                Object.keys(obj).forEach(function(key) {
-                    var exc = ['_id', 'deviceId', 'lastUpdated', 'version'];
-                    if(exc.includes(key))
-                        return;
-                    tags.push(key)                   
-                });
-            });
-            return Array.from(new Set(tags));
-        }
-
           
-        console.log("tags", getUniqTags())
-        var data = fillTags()     
-        console.log("res", data)        
+        //- console.log("tags", getUniqTags())
+        //- var chartDATA = fillTags()     
+        //- console.log("res", chartDATA)   
         
-        new Chartist.Line('.ct-chart', data[12]) // here it is the 'sum' tag
+        var options = {
+            //- width: '300px',
+            //- height: '200px'
+              lineSmooth: Chartist.Interpolation.cardinal({
+                    tension: 0.2
+                }),
+                showPoint: true,
+        };
+        new Chartist.Line('.ct-chart', chartData[3], options) // here it is the 'sum' tag
+
+
+
+
+//- CHARTIST DOCS : https://gionkunz.github.io/chartist-js/api-documentation.html
+//- EXAMPLES : https://gionkunz.github.io/chartist-js/examples.html

@@ -1,6 +1,7 @@
 var Device = require('../models/Device');
 var iothub = require('azure-iothub');
 var IoT = iothub.Registry.fromConnectionString('HostName=IoT-Hub-Autic.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=RTL3N58rFNgp016JVUJR85QuoIGiSjXzTvb5zrgZsGE=');
+var chartHelper = require('../models/chartHelper')
 
 exports.index = function (req, resp) {
     Device.readDevices((err, result) => {
@@ -37,7 +38,7 @@ exports.show = function(req, resp) {
     Device.readOneDevice(query, function(err, result) {
         if (err) throw err;
         // resp.send(result);
-        resp.render("show.jade", {ttl: "muhannad", chartData: result});   
+        resp.render("show.jade", {ttl: "muhannad", chartData: chartHelper.fillTags(result), device: req.params.id});   
     });
 }
 

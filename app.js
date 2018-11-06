@@ -13,7 +13,6 @@ var devsController = require("./controllers/devsController");
 // ROUTES
 var routing = require('./routes');
 app.use(routing.devs);
-app.get('/devices', devsController.index);
 app.get('/', (req, resp)=>{
     resp.send(`<h1>${ENV.db.messageConnected} on port:<br> ${ENV.port}</h1>`);
 });

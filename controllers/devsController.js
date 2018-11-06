@@ -5,16 +5,8 @@ var IoT = iothub.Registry.fromConnectionString('HostName=IoT-Hub-Autic.azure-dev
 exports.index = function (req, resp) {
     Device.readDevices((err, result) => {
         if (err) throw err;
-        // resp.json(result);
-        var x = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-            series: [
-                [5, 2, 4, 2, 0]
-            ]
-        };
-        resp.render("show.jade", { result: x});
+        resp.json(result);
     });
-    //<div class="ct-chart ct-perfect-fourth"></div>
 }
 
 exports.insertDataFromDevice = function (req, resp) {
@@ -22,7 +14,7 @@ exports.insertDataFromDevice = function (req, resp) {
         if (err) throw err;
         var query = {deviceId: req.params.devID};
         var newData = {"deviceId":twin.deviceId, 
-                        "lastUpdated": twin.properties.desired.$metadata.$lastUpdated,
+                        "lastUpdated": twin.properties.reported.$metadata.$lastUpdated,
                         "version": twin.properties.desired.$metadata.$lastUpdatedVersion,
                         ...twin.properties.reported.tags};
         Device.createDataForDevice(newData, function(err, result){
@@ -44,7 +36,8 @@ exports.show = function(req, resp) {
     var query = {"deviceId": req.params.id};
     Device.readOneDevice(query, function(err, result) {
         if (err) throw err;
-        resp.send(result);        
+        // resp.send(result);
+        resp.render("show.jade", {ttl: "muhannad", chartData: result});   
     });
 }
 

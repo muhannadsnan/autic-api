@@ -4,13 +4,13 @@ var devsController = require('../controllers/devsController');
 
 //===============================
 
-router.get('/api/devs', devsController.index);
-router.post('/api/devs', devsController.create);
-router.get('/api/devs/:id', devsController.show);
-router.put('/api/devs/:id', devsController.update);
-router.delete('/api/devs/:id', devsController.destroy);
+router.get('/devices', devsController.index);
+router.post('/devices', devsController.create);
+router.get('/devices/:id', devsController.show);
+router.put('/devices/:id', devsController.update);
+router.delete('/devices/:id', devsController.destroy);
 
-router.get('/api/insert/:devID', devsController.insertDataFromDevice);
+router.get('/devices/insert/:devID', devsController.insertDataFromDevice);
 
 
 module.exports = router;

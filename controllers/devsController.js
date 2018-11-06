@@ -6,13 +6,13 @@ exports.index = function (req, resp) {
     Device.readDevices((err, result) => {
         if (err) throw err;
         // resp.json(result);
-        var result = {
+        var x = {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
             series: [
                 [5, 2, 4, 2, 0]
             ]
         };
-        resp.render("show.jade", {muhannad: "data from node js", result: result});
+        resp.render("show.jade", { result: x});
     });
     //<div class="ct-chart ct-perfect-fourth"></div>
 }

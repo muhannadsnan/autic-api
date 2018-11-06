@@ -1,13 +1,14 @@
 extends ./layout.jade
 
 block title
-  title Article Title
+    title= 'muhannad'
 
 block content
-  pre= JSON.stringify(result)
-  <div class="ct-chart ct-perfect-fourth"></div>
+    h1 HI
+    pre= JSON.stringify(result)
+    <div class="ct-chart ct-perfect-fourth"></div>
 
-  script.
-    var result = JSON.stringify(result)
-    console.log('s', result)
-    new Chartist.Line('.ct-chart', result);
+    script.
+        var x = !{JSON.stringify(result)}
+        console.log('s', x)
+        new Chartist.Line('.ct-chart', x);

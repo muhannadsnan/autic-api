@@ -1,8 +1,10 @@
-var res = [
+var data = [
     //- {name: 'tag1', series: [VALUES...], labels: [DATES...]},
 ];
 
 module.exports.fillTags = function (chartData) {
+    // console.log("chartData", chartData);
+    data = [];
     var tags = getUniqTags(chartData);
     tags.forEach( tag => {
         chartData.forEach(row => {
@@ -12,9 +14,9 @@ module.exports.fillTags = function (chartData) {
                         var n = {name: tag, series: [[]], labels: []}
                         n.series[0].push(row[att])
                         n.labels.push(_date(row['lastUpdated']))
-                        res.push(n);
+                        data.push(n);
                     }else{
-                        res.forEach(y => {
+                        data.forEach(y => {
                             if(y.name == tag){
                                 y.series[0].push(row[att]); 
                                 y.labels.push(_date(row['lastUpdated']));
@@ -25,12 +27,12 @@ module.exports.fillTags = function (chartData) {
             });
         });
     }); 
-    return res;
+    return data;
 }
 
 function resIncludesTagBefore(tag){
     var x = false;
-    res.forEach( el => {
+    data.forEach( el => {
         if(el.name == tag)
             x = true;
     });

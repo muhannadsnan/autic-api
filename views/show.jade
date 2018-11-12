@@ -6,29 +6,29 @@ block title
 block content
     h1 Autic device:  #{device}
     pre= JSON.stringify(result)
-    <div class="ct-chart ct-perfect-fourth"></div>
-    //- each val, index in arr
-        //- <div class="ct-chart#{index} ct-perfect-fourth"></div>
+    each val, index in chartData
+        h3= val.name
+        <div class="ct-chart#{index} ct-perfect-fourth"></div>
+        hr
 
 
     script.
         var chartData = !{JSON.stringify(chartData)}
         console.log('chartData', chartData)
-          
-        //- console.log("tags", getUniqTags())
-        //- var chartDATA = fillTags()     
-        //- console.log("res", chartDATA)   
         
         var options = {
             //- width: '300px',
             //- height: '200px'
-              lineSmooth: Chartist.Interpolation.cardinal({
-                    tension: 0.2
-                }),
-                showPoint: true,
+            lineSmooth: Chartist.Interpolation.cardinal({ //.simple
+                tension: 0.2,
+                divisor: 2
+            }),
+            showPoint: true,
+            showArea: true
         };
-        new Chartist.Line('.ct-chart', chartData[3], options) // here it is the 'sum' tag
-
+        chartData.forEach((row, index)=>{
+            new Chartist.Line('.ct-chart'+index, row, options) // here it is the 'sum' tag
+        })
 
 
 

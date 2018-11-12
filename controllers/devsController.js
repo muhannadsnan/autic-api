@@ -37,10 +37,8 @@ exports.show = function(req, resp) {
     var query = {"deviceId": req.params.id};
     Device.readOneDevice(query, function(err, result) {
         if (err) throw err;
-        // resp.send(result);
-        // console.log("chartHelper.fillTags(result)", chartHelper.fillTags(result));
         resp.render("show.jade", {ttl: "muhannad", chartData: chartHelper.fillTags(result), device: req.params.id});   
-    });
+    }, 10);
 }
 
 exports.update = function (req, resp) {

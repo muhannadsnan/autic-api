@@ -16,12 +16,12 @@ module.exports.createDevice = function(newDev, callback){
     collection.insertOne(newDev, callback);
 };
 
-module.exports.readDevices = function(callback){
-    collection.find().toArray(callback);
+module.exports.readDevices = function(callback, limit=100, sort=-1){
+    collection.find().sort({lastUpdated:sort}).limit(limit).toArray(callback);
 };
 
-module.exports.readOneDevice = function(query, callback, limit=100){
-    collection.find(query).limit(limit).toArray(callback);
+module.exports.readOneDevice = function(query, callback, limit=100, sort=-1){
+    collection.find(query).sort({lastUpdated:sort}).limit(limit).toArray(callback);
 };
 
 module.exports.updateDevice = function (condition, updatedDev, options, callback){

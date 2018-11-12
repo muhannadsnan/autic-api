@@ -3,13 +3,26 @@ extends ./layout.jade
 block title
     title= ttl
 
+block styles
+    style(type='text/css').
+        @import url('https://fonts.googleapis.com/css?family=Dhurjati');
+        html{font-family: monospace}
+        h1{color: orange; text-align: center;}
+        .blk{width: 30%; height: 300px;border: 1px solid #ccc; float: left; margin: 10px}
+        .blk .tagName{text-align: center;}
+        .blk svg{border: 0px solid red; max-height: 240px}
+        .ct-area{}
+        .ct-line{stroke: purple !important}
+        .ct-point{stroke: red !important}
+
 block content
     h1 Autic device:  #{device}
     pre= JSON.stringify(result)
     each val, index in chartData
-        h3= val.name
-        <div class="ct-chart#{index} ct-perfect-fourth"></div>
-        hr
+        div.blk
+            h3.tagName= val.name
+            <div class="ct-chart#{index} ct-perfect-fourth"></div>
+        //- hr
 
 
     script.
@@ -17,8 +30,8 @@ block content
         console.log('chartData', chartData)
         
         var options = {
-            //- width: '300px',
-            //- height: '200px'
+            //- width: '33%',
+            //- height: '300px',
             lineSmooth: Chartist.Interpolation.cardinal({ //.simple
                 tension: 0.2,
                 divisor: 2

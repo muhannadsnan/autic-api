@@ -12,14 +12,14 @@ module.exports.fillTags = function (chartData) {
                 if(att == tag){
                     if(!resIncludesTagBefore(tag)){
                         var n = {name: tag, series: [[]], labels: []}
-                        n.series[0].push(row[att])
-                        n.labels.push(_date(row['lastUpdated']))
+                        n.series[0].unshift(row[att])
+                        n.labels.unshift(_date(row['lastUpdated']))
                         data.push(n);
                     }else{
                         data.forEach(y => {
                             if(y.name == tag){
-                                y.series[0].push(row[att]); 
-                                y.labels.push(_date(row['lastUpdated']));
+                                y.series[0].unshift(row[att]); 
+                                y.labels.unshift(_date(row['lastUpdated']));
                             }
                         });
                     }

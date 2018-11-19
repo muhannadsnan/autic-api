@@ -8,21 +8,28 @@ block styles
         @import url('https://fonts.googleapis.com/css?family=Dhurjati');
         html{font-family: monospace}
         h1{color: orange; text-align: center;}
+        h1 span{color: ;}
+        h1 small.connected{color: green; margin-left: 20px; font-size: 14pt;}
         .blk{width: 30%; height: 300px;border: 1px solid #ccc; float: left; margin: 10px}
         .blk .tagName{text-align: center;}
         .blk svg{border: 0px solid red; max-height: 240px}
         .ct-area{}
-        .ct-line{stroke: purple !important}
-        .ct-point{stroke: red !important}
+        .ct-line{stroke: #3d3d3d !important}
+        .ct-point{stroke: #000 !important}
 
 block content
-    h1 Autic device:  #{device}
+    - var x = 6
+    h1 Autic device:  
+        span.device #{device}
+        small.connected connected
     pre= JSON.stringify(result)
-    each val, index in chartData
+    //- each val, index in chartData
+    - for( i = 0; i < x; i++){
         div.blk
-            h3.tagName= val.name
-            <div class="ct-chart#{index} ct-perfect-fourth"></div>
+            //- h3.tagName= val.name
+            <div class="ct-chart#{i} ct-perfect-fourth"></div>
         //- hr
+    - }
 
 
     script.
@@ -33,11 +40,11 @@ block content
             //- width: '33%',
             //- height: '300px',
             lineSmooth: Chartist.Interpolation.cardinal({ //.simple
-                tension: 0.2,
+                tension: 00,
                 divisor: 2
             }),
-            showPoint: true,
-            showArea: true
+            showPoint: false,
+            showArea: false
         };
         chartData.forEach((row, index)=>{
             new Chartist.Line('.ct-chart'+index, row, options) // here it is the 'sum' tag

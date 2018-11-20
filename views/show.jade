@@ -6,34 +6,64 @@ block title
 block styles
     style(type='text/css').
         @import url('https://fonts.googleapis.com/css?family=Dhurjati');
-        html{font-family: monospace}
-        h1{color: orange; text-align: center;}
-        h1 span{color: ;}
-        h1 small.connected{color: green; margin-left: 20px; font-size: 14pt;}
-        .blk{width: 30%; height: 300px;border: 1px solid #ccc; float: left; margin: 10px}
+        html{font-family: monospace !important;}
+        h1,h2,h3,h4,h5,h6{font-family: monospace !important; font-weight: bold; padding: 10px;}
+        nav{background-color: #3f454b;}
+        h1.header{color: #efa92c; text-align: center; }
+        h1.header span{color: ;}
+        h1.header small.connected{color: #00ab00; margin-left: 20px; font-size: 14pt; font-weight: bold;}
+        table.tags{margin-top: 75px; border: 1px solid #ccc;}
+        .charts{}
+        .blk{height: 275px; border: 1px solid #ccc; float: left; border-radius: 5px; padding: 0;}
         .blk .tagName{text-align: center;}
         .blk svg{border: 0px solid red; max-height: 240px}
         .ct-area{}
-        .ct-line{stroke: #3d3d3d !important}
+        .ct-line{stroke: #3f454b !important;}
         .ct-point{stroke: #000 !important}
+        footer nav{height: 100px;}
+
 
 block content
-    - var x = 6
-    h1 Autic device:  
-        span.device #{device}
-        small.connected connected
-    pre= JSON.stringify(result)
-    //- each val, index in chartData
-    - for( i = 0; i < x; i++){
-        div.blk
-            //- h3.tagName= val.name
-            <div class="ct-chart#{i} ct-perfect-fourth"></div>
-        //- hr
-    - }
+    nav.navbar.navbar-dark.bg-lightx.fixed-top
+        h1.header.mx-auto Autic device:  
+            span.device #{device}
+            small.connected connected
+    //- small= JSON.stringify(chartData)
+    //- pre= JSON.stringify(allData)
+    - var isTH = false
+    - var exceptKeys = ['_id', 'deviceId']
+    table.tags.table.table-striped.table-light.table-hover  
+        each x, i in allData
+            - var ATTRIBUTES = Object.keys(x)
+            - if(!isTH){
+                each k in ATTRIBUTES
+                    - if(!exceptKeys.includes(k))
+                        th.table-dark= k
+                - isTH = true
+            - }
+                tr
+                    each h in ATTRIBUTES
+                        - if(!exceptKeys.includes(h))
+                            - if(h == "lastUpdated"){
+                                td= new Date(x[h]).toISOString().replace('T', ' ').slice(0, 19)
+                            - } else {
+                                td= x[h]
+                            - }
+    div.charts.row.justify-content-center
+        each val, i in chartData
+                div.blk.col-sm-12.col-md-5.col-lg-3.mb-3.mr-3.text-dark
+                    h3.tagName= val.name
+                    <div class="ct-chart#{i} ct-perfect-fourth"></div>
+    footer.pt-5.text-white
+        nav.navbar.navbar-dark.justify-content-center.text-center
+            h2.col-12(style="color: #efa92c") AUTIC &copy; 2018
+            p Muhannad Senan - msn-23@live.com
 
 
     script.
         var chartData = !{JSON.stringify(chartData)}
+        var allData = !{JSON.stringify(allData)}
+        console.log('allData', allData)
         console.log('chartData', chartData)
         
         var options = {

@@ -17,6 +17,7 @@ exports.insertDataFromDevice = function (req, resp) {
         var newData = {"deviceId":twin.deviceId, 
                         "lastUpdated": twin.properties.reported.$metadata.$lastUpdated,
                         "version": twin.properties.desired.$metadata.$lastUpdatedVersion,
+                        "connectionState": twin.connectionState,
                         ...twin.properties.reported.tags};
         Device.createDataForDevice(newData, function(err, result){
             if(err) throw err;

@@ -8,8 +8,6 @@ app.set('view engine', 'jade');
 //ENV
 var environment = require('./environment/environment')
 global.ENV = environment.env1;
-//CONTROLLERS
-var devsController = require("./controllers/devsController");
 // ROUTES
 var routing = require('./routes');
 app.use(routing.devs);

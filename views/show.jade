@@ -33,34 +33,37 @@ block content
                 small.connected #{allData[0].connectionState}
             - else 
                 small.disconnected #{allData[0].connectionState}
-    //- small= JSON.stringify(chartData)
-    //- pre= JSON.stringify(allData)
     - var isTH = false // <th>
     - var exceptKeys = ['_id', 'deviceId']
-    table.tags.table.table-striped.table-light.table-hover  
-        each x, i in allData
-            - var ATTRIBUTES = Object.keys(x)
-            - if(!isTH){
-                each k in ATTRIBUTES
-                    - if(!exceptKeys.includes(k)) 
-                        th.table-dark= k
-                - isTH = true
-            - }
-                tr
-                    each h in ATTRIBUTES
-                        - if(!exceptKeys.includes(h))
-                            - if(h == "lastUpdated"){
-                                td= new Date(x[h]).toISOString().replace('T', ' ').slice(0, 19)
-                            - } else {
-                                td= x[h]
-                            - }
-    div.charts.row.justify-content-center
-        each val, i in chartData
-            - if(typeof val.series[0][0] == 'number'){
-                div.blk.col-sm-12.col-md-5.col-lg-3.mb-3.mr-3.text-dark
-                    h3.tagName= val.name
-                    <div class="ct-chart#{i} ct-perfect-fourth"></div>
-            - }
+    //--------------------------------------------------
+    div.table-responsive-sm.table-responsive-md
+        table.tags.table.table-striped.table-light.table-hover  
+            each x, i in allData
+                - var ATTRIBUTES = Object.keys(x)
+                - if(!isTH){
+                    each k in ATTRIBUTES
+                        - if(!exceptKeys.includes(k)) 
+                            th.table-dark= k
+                    - isTH = true
+                - }
+                    tr
+                        each h in ATTRIBUTES
+                            - if(!exceptKeys.includes(h))
+                                - if(h == "lastUpdated"){
+                                    td= new Date(x[h]).toISOString().replace('T', ' ').slice(0, 19)
+                                - } else {
+                                    td= x[h]
+                                - }
+    //--------------------------------------------------
+    div.container-fluid
+        div.charts.row.justify-content-center
+                each val, i in chartData
+                    - if(typeof val.series[0][0] == 'number'){
+                        div.blk.col-sm-12.col-md-5.col-lg-3.mb-3.mr-3.text-dark
+                            h3.tagName= val.name
+                            <div class="ct-chart#{i} ct-perfect-fourth"></div>
+                    - }
+    //--------------------------------------------------
     footer.pt-5.text-white
         nav.navbar.navbar-dark.justify-content-center.text-center
             h2.col-12(style="color: #efa92c") AUTIC &copy; 2019

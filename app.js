@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+
+var iot = require('./iot-twin').getTwin('test-001'); // IoT Hub Device 
+var mqttIoT = require('./mqtt-iot').openClient('test-001'); // mqtt IoT 
+
 app.use(bodyParser.json()); // configure the app to use bodyParser()
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');

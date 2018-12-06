@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/muhannadsnan/autic-api#readme",
   "dependencies": {
-    "azure-iothub": "^1.8.1",
+    "azure-iot-device": "^1.8.2",
+    "azure-iot-device-mqtt": "^1.8.2",
+    "azure-iothub": "^1.8.2",
     "body-parser": "*",
+    "chalk": "^2.4.1",
     "chartist": "^0.11.0",
     "express": "*",
     "jade": "^1.11.0",

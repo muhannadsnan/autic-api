@@ -8,12 +8,13 @@ module.exports = {
         var registry = iothub.Registry.fromConnectionString(connectionString);
         var queryTwins = function() {
             console.log(`IoT Hub listener on device: ${devID}.....`);
-            var query = registry.createQuery("SELECT * FROM devices WHERE tags.location.plant = 'Redmond43'", 100);
+            var query = registry.createQuery("SELECT * FROM devices WHERE tags.location.plant != ''", 100);
             query.nextAsTwin(function(err, results) {
                 if (err) {
                     console.error('Failed to fetch the results: ' + err.message);
                 } else {
                     console.log(`Data from Iot device ${devID}: ` + results.map(function(twin) {return twin.deviceId}).join(','));
+                    // console.log(results);
                 }
             });
         
@@ -34,7 +35,7 @@ module.exports = {
                 var patch = {
                     tags: {
                         location: {
-                            plant: 1000
+                            plant: 140
                       }
                     }
                 };
@@ -49,5 +50,5 @@ module.exports = {
                 });
             }
         });
-    }      
+    }
 }

@@ -19,5 +19,6 @@ app.get('/', (req, resp)=>{
 app.listen(ENV.port, ()=> console.log(`Node running on port ${ENV.port}...`) );
 
 
+// var eh = require('./read-dev-to-cloud'); // IoT Hub Device 
+// var mqttIoT = require('./mqtt-iot').openClient('test-001'); // mqtt IoT 
 var iot = require('./iot-twin').getTwin('test-001'); // IoT Hub Device 
-var mqttIoT = require('./mqtt-iot').openClient('test-001'); // mqtt IoT 

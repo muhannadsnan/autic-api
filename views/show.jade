@@ -36,8 +36,8 @@ block content
     - var isTH = false // <th>
     - var exceptKeys = ['_id', 'deviceId']
     //--------------------------------------------------
-    div.table-responsive-sm.table-responsive-md
-        table.tags.table.table-striped.table-light.table-hover  
+    div.table-responsive
+        table.tags.table.table-striped.table-light.table-hover
             each x, i in allData
                 - var ATTRIBUTES = Object.keys(x)
                 - if(!isTH){
